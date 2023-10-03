@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CafeViewModel(application: Application):AndroidViewModel(application) {
+    val readAllMenuData : LiveData<List<Menu>>
     val readMenuData : LiveData<List<Menu>>
     val readMenuMakananData : LiveData<List<Menu>>
     val readMenuMinumanData : LiveData<List<Menu>>
@@ -22,6 +23,7 @@ class CafeViewModel(application: Application):AndroidViewModel(application) {
     init {
         val cafeDao = CafeDatabase.getDatabase(application).cafeDao()
         repository = CafeRepository(cafeDao)
+        readAllMenuData = repository.readAllMenuData
         readMenuData = repository.readMenuData
         readMenuMakananData = repository.readMenuMakananData
         readMenuMinumanData = repository.readMenuMinumanData
@@ -29,6 +31,12 @@ class CafeViewModel(application: Application):AndroidViewModel(application) {
         readAllPesanan = repository.readAllPesanan
     }
 
+    fun getMenuData(string: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getMenuData(string)
+        }
+    }
     fun insertMenu(menu: Menu){
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertOneMenu(menu)

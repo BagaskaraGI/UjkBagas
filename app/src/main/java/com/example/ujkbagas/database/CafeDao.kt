@@ -37,7 +37,7 @@ interface CafeDao {
     fun getDessertMenu(): LiveData<List<Menu>>
 
 
-    @Query("SELECT * FROM pesanan_table ORDER BY waktu DESC")
+    @Query("SELECT * FROM pesanan_table ORDER BY waktuPesan DESC")
     fun readAllPesanan(): LiveData<List<Pesanan>>
 
     @Delete

@@ -11,6 +11,6 @@ data class Pesanan(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val nomerMeja: String,
-    val menu: Menu,
-    val waktu : String
+    val namaMenu: String,
+    val waktuPesan : String
 ) : Parcelable

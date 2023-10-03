@@ -38,6 +38,13 @@
             android:layout_height="wrap_content"
             android:text="Dapur"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/idbtn_insertData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Insert Data Menu"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

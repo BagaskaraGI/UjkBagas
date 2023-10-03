@@ -3,6 +3,7 @@ package com.example.ujkbagas.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.ujkbagas.R
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         mCafeViewModel = ViewModelProvider(this).get(CafeViewModel::class.java)
 
-        mCafeViewModel.insertListMenu(dataMenu)
 
         setContentView(binding.root)
 
@@ -31,21 +31,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.idbtnMenu.setOnClickListener(this)
         binding.idbtnPesanan.setOnClickListener(this)
         binding.idbtnDapur.setOnClickListener(this)
+        binding.idbtnInsertData.setOnClickListener(this)
 
     }
 
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.idbtn_menu -> {
+                Log.d("Input Data Menu", "$dataMenu")
                 val intent = Intent(this, KategoriActivity::class.java)
                 startActivity(intent)
             }
             R.id.idbtn_pesanan -> {
-                val intent = Intent(this, PesananActivity::class.java)
-                startActivity(intent)
+//                val intent = Intent(this, PesananActivity::class.java)
+//                startActivity(intent)
             }
             R.id.idbtn_dapur -> {
-                startActivity(Intent(this, DapurActivity::class.java))
+//                startActivity(Intent(this, DapurActivity::class.java))
+            }
+            R.id.idbtn_insertData ->{
+                mCafeViewModel.insertListMenu(dataMenu)
             }
         }
     }

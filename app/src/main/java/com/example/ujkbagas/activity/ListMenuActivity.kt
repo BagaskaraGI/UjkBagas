@@ -1,18 +1,25 @@
 package com.example.ujkbagas.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ujkbagas.R
 import com.example.ujkbagas.adapter.ListMenuAdapter
 import com.example.ujkbagas.database.CafeViewModel
 import com.example.ujkbagas.databinding.ActivityListMenuBinding
+import com.example.ujkbagas.intentKey.Key
+import com.example.ujkbagas.model.Menu
 
-class ListMenuActivity : AppCompatActivity() {
+class ListMenuActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityListMenuBinding
     private lateinit var mCafeViewModel: CafeViewModel
     private var getNoMejaPesanan: String? = null
+    private lateinit var adapter: ListMenuAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,17 +29,75 @@ class ListMenuActivity : AppCompatActivity() {
 
         mCafeViewModel = ViewModelProvider(this).get(CafeViewModel::class.java)
 
-        val adapter = ListMenuAdapter()
+        val adapterRV = ListMenuAdapter()
         val rvListMenu = binding.idrvListMenu
-        rvListMenu.adapter = adapter
+//        rvListMenu.adapter = adapter
+        rvListMenu.apply {
+            adapter = adapterRV
+            adapterRV.onItemClick(object : ListMenuAdapter.IOnItemClickCallback{
+                override fun onItemClicked(menu: Menu) {
+                    val intent = Intent(this@ListMenuActivity, MenuDetailActivity::class.java)
+                    intent.putExtra("Data Menu", menu)
+                    startActivity(intent)
+                }
+            })
+
+        }
         rvListMenu.layoutManager = LinearLayoutManager(this)
 
-        mCafeViewModel
+
+        val intent = intent
+        val kategoriMenu = intent.getStringExtra(Key.KEY_KATEGORI)
+
+        when(kategoriMenu){
+            "Makanan" -> {
+                mCafeViewModel.readMenuMakananData.observe(this, Observer {
+                    adapter.setData(it)
+                    Log.d("Tes Jumlah data", "${adapter.itemCount}")
+                })
+            }
+            "Minuman" -> {
+                mCafeViewModel.readMenuMinumanData.observe(this, Observer {
+                    adapter.setData(it)
+                    Log.d("Tes Jumlah data", "${adapter.itemCount}")
+                })
+
+            }
+            "Dessert" -> {
+                mCafeViewModel.readMenuDessertData.observe(this, Observer {
+                    adapter.setData(it)
+                    Log.d("Tes Jumlah data", "${adapter.itemCount}")
+                })
+
+            }
+        }
+
+//        mCafeViewModel.readMenuData.observe(this, Observer {
+//            adapter.setData(it)
+//            Log.d("Tes Jumlah data", "${adapter.itemCount}")
+//        })
+
+        binding.idbtnMakanan2.setOnClickListener(this)
+        binding.idbtnMinuman2.setOnClickListener(this)
+        binding.idbtnDessert2.setOnClickListener(this)
+
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.idbtn_makanan -> {
 
 
+            }
+
+            R.id.idbtn_minuman -> {
+
+            }
+
+            R.id.idbtn_dessert -> {
 
 
-
-
+            }
+        }
     }
 }

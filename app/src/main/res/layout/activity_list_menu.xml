@@ -7,14 +7,48 @@
     tools:context=".activity.ListMenuActivity"
     >
 
+    <Button
+        android:id="@+id/idbtn_makanan2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Makanan"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/idbtn_minuman2"
+        app:layout_constraintEnd_toStartOf="@+id/idbtn_minuman2"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/idbtn_minuman2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Minuman"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/idbtn_dessert2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dessert"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/idbtn_minuman2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toEndOf="@+id/idbtn_minuman2" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idrv_listMenu"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_list_menu"/>
+        app:layout_constraintTop_toBottomOf="@+id/idbtn_minuman2"
+        tools:listitem="@layout/item_list_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

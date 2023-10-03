@@ -15,6 +15,12 @@ import com.example.ujkbagas.model.Menu
 class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.MyViewHolder>() {
     private var listMenu = emptyList<Menu>()
 
+    private lateinit var onItemClickCallback: IOnItemClickCallback
+
+    fun onItemClick(itemClick: IOnItemClickCallback) {
+        this.onItemClickCallback = itemClick
+    }
+
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val gambarMenu :ImageView = itemView.findViewById(R.id.idimg_menu)
         val namaMenu : TextView = itemView.findViewById(R.id.idname_menu)
@@ -36,6 +42,9 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.MyViewHolder>() {
             .load(menu.gambarMenu)
             .fitCenter()
             .into(holder.gambarMenu)
+        holder.itemView.setOnClickListener{
+            onItemClickCallback.onItemClicked(menu)
+        }
 
     }
 
@@ -44,6 +53,14 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.MyViewHolder>() {
         this.listMenu = listMenu
         Log.d("List Menu", listMenu.toString())
         notifyDataSetChanged()
+    }
+
+    fun deleteData(){
+        this.listMenu = emptyList<Menu>()
+    }
+
+    interface IOnItemClickCallback {
+        fun onItemClicked(menu: Menu)
     }
 
 }

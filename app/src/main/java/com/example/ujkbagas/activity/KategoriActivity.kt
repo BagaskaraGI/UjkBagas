@@ -32,16 +32,17 @@ class KategoriActivity : AppCompatActivity(), View.OnClickListener {
             R.id.idbtn_makanan -> {
                 val intent = Intent(this@KategoriActivity, ListMenuActivity::class.java)
                 intent.putExtra(Key.KEY_NO_MEJA, getNoMejaPesanan)
+                intent.putExtra(Key.KEY_KATEGORI, "Makanan")
                 startActivity(intent)
             }
             R.id.idbtn_minuman -> {
                 val intent = Intent(this@KategoriActivity, ListMenuActivity::class.java)
-                intent.putExtra(Key.KEY_NO_MEJA, getNoMejaPesanan)
+                intent.putExtra(Key.KEY_KATEGORI, "Minuman")
                 startActivity(intent)
             }
             R.id.idbtn_dessert -> {
                 val intent = Intent(this@KategoriActivity, ListMenuActivity::class.java)
-                intent.putExtra(Key.KEY_NO_MEJA, getNoMejaPesanan)
+                intent.putExtra(Key.KEY_KATEGORI, "Dessert")
                 startActivity(intent)
             }
         }
