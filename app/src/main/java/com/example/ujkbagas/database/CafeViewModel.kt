@@ -12,11 +12,11 @@ import kotlinx.coroutines.launch
 
 class CafeViewModel(application: Application):AndroidViewModel(application) {
     val readAllMenuData : LiveData<List<Menu>>
-    val readMenuData : LiveData<List<Menu>>
     val readMenuMakananData : LiveData<List<Menu>>
     val readMenuMinumanData : LiveData<List<Menu>>
     val readMenuDessertData : LiveData<List<Menu>>
     val readAllPesanan : LiveData<List<Pesanan>>
+    val readPesananDapur : LiveData<List<Pesanan>>
 
     private val repository : CafeRepository
 
@@ -24,19 +24,14 @@ class CafeViewModel(application: Application):AndroidViewModel(application) {
         val cafeDao = CafeDatabase.getDatabase(application).cafeDao()
         repository = CafeRepository(cafeDao)
         readAllMenuData = repository.readAllMenuData
-        readMenuData = repository.readMenuData
         readMenuMakananData = repository.readMenuMakananData
         readMenuMinumanData = repository.readMenuMinumanData
         readMenuDessertData = repository.readMenuDessertData
         readAllPesanan = repository.readAllPesanan
+        readPesananDapur = repository.readPesananDapur
     }
 
-    fun getMenuData(string: String)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getMenuData(string)
-        }
-    }
+
     fun insertMenu(menu: Menu){
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertOneMenu(menu)
@@ -60,6 +55,24 @@ class CafeViewModel(application: Application):AndroidViewModel(application) {
             repository.insertListPesanan(listPesanan)
         }
     }
+
+    fun deletePesanan(pesanan: Pesanan){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deletePemesanan(pesanan)
+        }
+    }
+
+    fun updatePemesananTemp(nomorMeja :String){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updatePemesananTemp(nomorMeja)
+        }
+    }
+
+    fun readPemesananTemp(nomorMeja: String): LiveData<List<Pesanan>> {
+        return repository.readPemesananTemp(nomorMeja)
+    }
+
+
 
 
 

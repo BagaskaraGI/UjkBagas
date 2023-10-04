@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.idbtn_pesanan -> {
-//                val intent = Intent(this, PesananActivity::class.java)
-//                startActivity(intent)
+                val intent = Intent(this, PesananActivity::class.java)
+                startActivity(intent)
             }
             R.id.idbtn_dapur -> {
 //                startActivity(Intent(this, DapurActivity::class.java))

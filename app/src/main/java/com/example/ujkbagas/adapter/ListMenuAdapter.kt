@@ -50,6 +50,7 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.MyViewHolder>() {
 
 
     fun setData(listMenu: List<Menu>) {
+        this.listMenu = emptyList<Menu>()
         this.listMenu = listMenu
         Log.d("List Menu", listMenu.toString())
         notifyDataSetChanged()

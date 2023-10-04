@@ -40,6 +40,18 @@ interface CafeDao {
     @Query("SELECT * FROM pesanan_table ORDER BY waktuPesan DESC")
     fun readAllPesanan(): LiveData<List<Pesanan>>
 
+
+    @Query("SELECT * FROM pesanan_table WHERE nomerMeja = :nomorMeja AND statusPesan = 'Belum Dipesan' ORDER BY waktuPesan DESC")
+    fun readPesananTemp(nomorMeja : String): LiveData<List<Pesanan>>
+
+    @Query("UPDATE pesanan_table SET statusPesan = 'Sudah Dipesan' WHERE nomerMeja = :nomerMeja AND statusPesan = 'Belum Dipesan'")
+    fun updatePesananTemp(nomerMeja : String)
+
+
+    @Query("SELECT * FROM pesanan_table WHERE statusPesan = 'Sudah Dipesan' ORDER BY waktuPesan DESC")
+    fun readPesananDapur(): LiveData<List<Pesanan>>
+
+
     @Delete
     fun deletePesanan(pesanan: Pesanan)
 

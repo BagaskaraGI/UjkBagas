@@ -29,6 +29,15 @@ class ListMenuActivity : AppCompatActivity(), View.OnClickListener {
 
         mCafeViewModel = ViewModelProvider(this).get(CafeViewModel::class.java)
 
+        getNoMejaPesanan = intent.getStringExtra(Key.KEY_NO_MEJA)
+        if (getNoMejaPesanan != null){
+            Log.d(Key.KEY_NO_MEJA, getNoMejaPesanan!!)
+        }else{
+            Log.d(Key.KEY_NO_MEJA, "Null")
+        }
+
+
+
         adapterRV = ListMenuAdapter()
         val rvListMenu = binding.idrvListMenu
         rvListMenu.adapter = adapterRV
@@ -38,6 +47,8 @@ class ListMenuActivity : AppCompatActivity(), View.OnClickListener {
                 override fun onItemClicked(menu: Menu) {
                     val intent = Intent(this@ListMenuActivity, MenuDetailActivity::class.java)
                     intent.putExtra("Data Menu", menu)
+                    intent.putExtra(Key.KEY_NO_MEJA, getNoMejaPesanan)
+                    getNoMejaPesanan?.let { Log.d(Key.KEY_NO_MEJA, it) }
                     startActivity(intent)
                 }
             })
@@ -86,17 +97,30 @@ class ListMenuActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.idbtn_makanan -> {
-
-
+                mCafeViewModel.readMenuMakananData.observe(this, Observer {
+                    adapterRV.setData(it)
+                    Log.d("Tes Jumlah data", "${adapterRV.itemCount}")
+                    adapterRV.notifyDataSetChanged()
+                })
+                recreate()
             }
 
             R.id.idbtn_minuman -> {
-
+                mCafeViewModel.readMenuMinumanData.observe(this, Observer {
+                    adapterRV.setData(it)
+                    Log.d("Tes Jumlah data", "${adapterRV.itemCount}")
+                    adapterRV.notifyDataSetChanged()
+                })
+                recreate()
             }
 
             R.id.idbtn_dessert -> {
-
-
+                mCafeViewModel.readMenuDessertData.observe(this, Observer {
+                    adapterRV.setData(it)
+                    Log.d("Tes Jumlah data", "${adapterRV.itemCount}")
+                    adapterRV.notifyDataSetChanged()
+                })
+                recreate()
             }
         }
     }

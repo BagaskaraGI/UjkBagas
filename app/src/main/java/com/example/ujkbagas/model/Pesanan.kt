@@ -12,5 +12,7 @@ data class Pesanan(
     val id: Int,
     val nomerMeja: String,
     val namaMenu: String,
-    val waktuPesan : String
+    val hargaMenu: Int,
+    val waktuPesan : String,
+    val statusPesan : String
 ) : Parcelable
