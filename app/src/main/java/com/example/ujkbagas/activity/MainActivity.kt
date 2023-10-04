@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.idbtn_dapur -> {
-//                startActivity(Intent(this, DapurActivity::class.java))
+                startActivity(Intent(this, DapurActivity::class.java))
             }
             R.id.idbtn_insertData ->{
                 mCafeViewModel.insertListMenu(dataMenu)
